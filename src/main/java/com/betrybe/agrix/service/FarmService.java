@@ -1,12 +1,13 @@
 package com.betrybe.agrix.service;
 
-
 import com.betrybe.agrix.models.entities.Farm;
 import com.betrybe.agrix.models.repositories.FarmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 
 /**
  * class.

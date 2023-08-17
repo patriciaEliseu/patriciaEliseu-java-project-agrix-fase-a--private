@@ -23,6 +23,11 @@ public class Farm {
   public Farm() {
   }
 
+  /**
+   * class.
+   */
+
+
   public Farm(Long id, String name, Double size) {
     this.id = id;
     this.name = name;
