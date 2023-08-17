@@ -23,6 +23,10 @@ public class Crop {
   public Crop() {
   }
 
+  /**
+   * class.
+   */
+
   public Crop(Long id, String name, Double plantedArea) {
     this.id = id;
     this.name = name;
