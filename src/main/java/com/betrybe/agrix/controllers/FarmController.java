@@ -63,14 +63,14 @@ public class FarmController {
 
 
   @GetMapping("/{id}")
-  public ResponseEntity<ResponseDto<Farm>> getFarmById(@PathVariable Long id) {
+  public ResponseEntity<?> getFarmById(@PathVariable Long id) {
     Optional<Farm> optionalFarm = farmService.getFarmById(id);
     if (optionalFarm.isEmpty()) {
       ResponseDto<Farm> responseDto = new ResponseDto<>(
-          String.format("Fazenda não encontrada!", id), null);
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseDto);
+          String.format("Fazenda não encontrada!"));
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fazenda não encontrada!");
     }
-    ResponseDto<Farm> responseDto = new ResponseDto<>("Fazenda encontrada!", optionalFarm.get());
-    return ResponseEntity.ok(responseDto);
+
+    return ResponseEntity.ok(optionalFarm.get());
   }
 }
