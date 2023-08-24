@@ -17,7 +17,6 @@ public class FarmService {
   private final FarmRepository farmRepository;
 
   @Autowired
-
   public FarmService(FarmRepository farmRepository) {
     this.farmRepository = farmRepository;
   }

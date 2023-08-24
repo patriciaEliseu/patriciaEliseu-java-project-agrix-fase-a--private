@@ -1,8 +1,12 @@
 package com.betrybe.agrix.controllers;
 
+import com.betrybe.agrix.controllers.dto.CropDto;
 import com.betrybe.agrix.controllers.dto.FarmDto;
+import com.betrybe.agrix.models.entities.Crop;
 import com.betrybe.agrix.models.entities.Farm;
+import com.betrybe.agrix.service.CropService;
 import com.betrybe.agrix.service.FarmService;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,10 +31,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class FarmController {
 
   private final FarmService farmService;
+  private final CropService cropService;
 
   @Autowired
-  public FarmController(FarmService farmService) {
+  public FarmController(FarmService farmService, CropService cropService) {
     this.farmService = farmService;
+    this.cropService = cropService;
   }
 
   /**
@@ -72,4 +78,27 @@ public class FarmController {
 
     return optionalFarm.get();
   }
+
+
+  /**
+   * post.
+   */
+
+  @PostMapping("/{farmId}/crops")
+  public ResponseEntity<CropDto> getCropsFarmId(
+      @PathVariable Long farmId, @RequestBody CropDto cropDto) throws CustomError {
+    Optional<Farm> optionalFarm = farmService.getFarmById(farmId);
+
+    if (optionalFarm.isEmpty()) {
+      throw new CustomError("Fazenda não encontrada!", 404);
+    }
+    Crop crop = cropDto.toCrop();
+    crop.setFarm(optionalFarm.get());
+
+    cropService.insertCrop(crop);
+    return ResponseEntity.status(HttpStatus.CREATED)
+        .body(new CropDto(
+            crop.getId(), crop.getName(), crop.getPlantedArea(), crop.getFarm().getId()));
+  }
+
 }
