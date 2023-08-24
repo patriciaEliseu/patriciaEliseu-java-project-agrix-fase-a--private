@@ -1,7 +1,6 @@
 package com.betrybe.agrix.controllers;
 
 import com.betrybe.agrix.controllers.dto.FarmDto;
-import com.betrybe.agrix.controllers.dto.ResponseDto;
 import com.betrybe.agrix.models.entities.Farm;
 import com.betrybe.agrix.service.FarmService;
 import java.util.List;
@@ -63,14 +62,14 @@ public class FarmController {
 
 
   @GetMapping("/{id}")
-  public ResponseEntity<?> getFarmById(@PathVariable Long id) {
+  public Farm getFarmById(@PathVariable Long id) throws CustomError {
     Optional<Farm> optionalFarm = farmService.getFarmById(id);
+
     if (optionalFarm.isEmpty()) {
-      ResponseDto<Farm> responseDto = new ResponseDto<>(
-          String.format("Fazenda não encontrada!"));
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fazenda não encontrada!");
+      throw new CustomError("Fazenda não encontrada!", 404);
+
     }
 
-    return ResponseEntity.ok(optionalFarm.get());
+    return optionalFarm.get();
   }
 }
