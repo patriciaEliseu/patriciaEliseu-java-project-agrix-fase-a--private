@@ -6,12 +6,16 @@ package com.betrybe.agrix.controllers;
  */
 
 
-public class CustomError extends Exception {
+public class CustomError extends RuntimeException {
   int status;
 
   public CustomError(String message, int status) {
     super(message);
     this.status = status;
+  }
+
+  public CustomError(String message) {
+    super(message);
   }
 
   public int getStatus() {

@@ -6,7 +6,6 @@ import com.betrybe.agrix.models.entities.Crop;
 import com.betrybe.agrix.models.entities.Farm;
 import com.betrybe.agrix.service.CropService;
 import com.betrybe.agrix.service.FarmService;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -81,11 +80,11 @@ public class FarmController {
 
 
   /**
-   * post.
+   * post crops.
    */
 
   @PostMapping("/{farmId}/crops")
-  public ResponseEntity<CropDto> getCropsFarmId(
+  public ResponseEntity<CropDto> postCropsFarmId(
       @PathVariable Long farmId, @RequestBody CropDto cropDto) throws CustomError {
     Optional<Farm> optionalFarm = farmService.getFarmById(farmId);
 
@@ -99,6 +98,26 @@ public class FarmController {
     return ResponseEntity.status(HttpStatus.CREATED)
         .body(new CropDto(
             crop.getId(), crop.getName(), crop.getPlantedArea(), crop.getFarm().getId()));
+  }
+
+
+  /**
+   * get crops.
+   */
+
+  @GetMapping("/{farmId}/crops")
+  public List<CropDto> getCropsFarmId(
+      @PathVariable Long farmId) throws CustomError {
+    Optional<Farm> optionalFarm = farmService.getFarmById(farmId);
+
+    if (optionalFarm.isPresent()) {
+
+      List<Crop> allCrops = optionalFarm.get().getCrops();
+      return allCrops.stream()
+          .map(crop -> CropDto.toDto(crop)).toList();
+    } else {
+      throw new CustomError("Fazenda não encontrada!");
+    }
   }
 
 }

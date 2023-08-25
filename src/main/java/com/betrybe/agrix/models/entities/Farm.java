@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
+import java.util.stream.Collector;
 import org.hibernate.annotations.ManyToAny;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.stylesheets.LinkStyle;
@@ -26,7 +27,7 @@ public class Farm {
   private Long id;
   private String name;
   private Double size;
-  @OneToMany
+  @OneToMany(mappedBy = "farm")
   @JsonIgnore
   private List<Crop> crops;
 
@@ -75,4 +76,6 @@ public class Farm {
   public void setCrops(List<Crop> crops) {
     this.crops = crops;
   }
+
+
 }

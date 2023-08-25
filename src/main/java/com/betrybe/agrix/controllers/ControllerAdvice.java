@@ -1,6 +1,8 @@
 package com.betrybe.agrix.controllers;
 
 import com.betrybe.agrix.controllers.dto.ResponseDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -13,9 +15,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ControllerAdvice {
 
   @ExceptionHandler(CustomError.class)
-  public ResponseEntity<ResponseDto> handleException(CustomError error) {
-    ResponseDto responseDto = new ResponseDto<>(null, error.getMessage());
-    return ResponseEntity.status(error.getStatus()).body(responseDto);
+  public ResponseEntity<String> handleException(CustomError error) {
+
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error.getMessage());
   }
 
   @ExceptionHandler(Exception.class)
