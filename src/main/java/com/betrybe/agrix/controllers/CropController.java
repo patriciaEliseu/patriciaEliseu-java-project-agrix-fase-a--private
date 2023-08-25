@@ -51,4 +51,22 @@ public class CropController {
             crop.getId(), crop.getName(), crop.getPlantedArea(), crop.getFarm().getId()));
     return cropDtoStream.toList();
   }
+
+
+  /**
+   * getById.
+   */
+
+  @GetMapping("/{id}")
+  public CropDto getCropById(@PathVariable Long id) throws CustomError {
+    Optional<Crop> optionalCrop = cropService.getCropById(id);
+
+    if (optionalCrop.isEmpty()) {
+      throw new CustomError("Plantação não encontrada!", 404);
+
+    }
+
+    return optionalCrop.map(crop -> CropDto.toDto(crop)).get();
+  }
+
 }
