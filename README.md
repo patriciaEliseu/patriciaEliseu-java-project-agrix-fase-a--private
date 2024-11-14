@@ -1,13 +1,29 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Projeto Agrix Fase A 
+**_Este projeto foi idealizado pela Trybe._**
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+Clonei o repositório da Trybe e desenvolvi :
+
+- Criei rotas de API;
+- Injetei dependências para conectar as camadas de controle, serviço e persistência;
+- Implementei entidades e repositórios para a persistência em banco de dados com Spring Data JPA;
+- Gerenciamento de erros com Spring Web;
+- Criei Dockerfile para configurar a aplicação para execução no Docker.
+
+  
+**_Trybe sugeriu que usassemos:_**
+
+O pluging do Checkstyle para garantir a qualidade no nosso código.
+
+comando executado:
+
+----
+mvn checkstyle:check
+----
+
+---
+mvn teste
+---
+
+IDE utilizada:
+Intellij IDE
